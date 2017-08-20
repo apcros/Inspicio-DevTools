@@ -1,0 +1,5 @@
+#Symlink created by Vagrant to access VM's files
+vagrant-box/vm-www-dir
+
+#Logs that are sometimes left by vagrant
+vagrant-box/*.log
