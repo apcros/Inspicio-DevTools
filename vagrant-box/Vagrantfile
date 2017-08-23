@@ -1,7 +1,11 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/zesty64"
   config.ssh.forward_agent = true
-  config.vm.network "forwarded_port", guest: 80, host: 5580
-  config.vm.network "forwarded_port", guest: 443, host: 5543
+  config.vm.network "forwarded_port", guest: 80, host: 80
+  config.vm.network "forwarded_port", guest: 443, host: 443
+  config.vm.synced_folder "", "/vagrant/",
+    owner: "ubuntu",
+    group: "ubuntu",
+    mount_options: ["dmode=777,fmode=777"]
   config.vm.provision "shell", path: "scripts/setup.sh"
 end
