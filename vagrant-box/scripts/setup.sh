@@ -7,6 +7,7 @@ sudo apt-get install apache2 php php-pgsql php-json postgresql php7.0-xml php-mb
 
 echo "=== Configuring Apache2 ==="
 #TODO : HTTPS config
+sudo cp /vagrant/confs/apache_dev_inspicio.conf /etc/apache2/sites-enabled/dev_inspicio.conf
 #TODO : Change apache user to be vagrant
 sudo a2enmod rewrite
 sudo service apache2 restart
@@ -29,6 +30,7 @@ php -r "unlink('composer-setup.php');"
 echo "=== Setting up Inspicio ==="
 cd /var/www/html/ && git clone https://github.com/apcros/Inspicio.git
 cd /var/www/html/Inspicio
+cp /vagrant/confs/env_inspicio_dev.env .env
 composer install
 php artisan key:generate
 #TODO : Start the queue ?
