@@ -31,13 +31,16 @@ php -r "unlink('composer-setup.php');"
 
 
 echo "=== Setting up Inspicio ==="
-cd /var/www/html/ && git clone https://github.com/apcros/Inspicio.git
+cd /vagrant/ && mkdir vm-www-dir
+cd /vagrant/vm-www-dir
+git clone https://github.com/apcros/Inspicio.git
 sudo chown -R ubuntu:ubuntu /var/www/
-cd /var/www/html/Inspicio
+cd /vagrant/vm-www-dir/Inspicio
 cp /vagrant/confs/env_inspicio_dev.env .env
+
 composer install
 php artisan key:generate
 php artisan migrate
-
-sudo ln -s /var/www/html/ /vagrant/vm-www-dir
-sudo service apache2 start
+sudo rm -rf /var/www/html
+sudo ln -s /vagrant/vm-www-dir /var/www/html
+sudo service apache2 restart
